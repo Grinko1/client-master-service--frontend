@@ -1,0 +1,14 @@
+{
+  "Redux Test Template": {
+    "prefix": "reduxtest",
+    "body": [
+      "",
+      "describe( '${1:${TM_FILENAME_BASE} description}', () => {",
+      "    test('${2:should}', () => {",
+      "        expect().toEqual();",
+      "    });",
+      "});"
+    ],
+    "description": "Redux test template"
+  }
+}

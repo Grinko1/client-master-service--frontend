@@ -1,0 +1,27 @@
+{
+  "React stories": {
+    "prefix": "react-stories",
+    "body": [
+      "import React from 'react';",
+      "import { ComponentMeta, ComponentStory } from '@storybook/react';",
+      "import { StoreDecorator } from '@/shared/config/storybook/StoreDecorator/StoreDecorator';",
+      "",
+      "import ${TM_FILENAME_BASE} from './${TM_FILENAME_BASE}';",
+      "",
+      "export default {",
+      "    title: '{folder}/$1',",
+      "    component: $1,",
+      "    argTypes: {",
+      "        backgroundColor: { control: 'color' },",
+      "    },",
+      "} as ComponentMeta<typeof $1>;",
+      "",
+      "const Template: ComponentStory<typeof $1> = (args) => <$1 {...args} />;",
+      "export const Normal = Template.bind({});",
+      "Normal.args = {};",
+      "Normal.decorators = [StoreDecorator({})];",
+      "$0"
+    ],
+    "description": "Create a React stories"
+  }
+}

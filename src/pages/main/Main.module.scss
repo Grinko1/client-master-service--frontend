@@ -1,0 +1,20 @@
+.Main {
+    .MainBlock {
+        width: 80%;
+        margin-top: 15% !important;
+        display: flex;
+        margin: auto;
+        align-items: center;
+        justify-content: space-evenly;
+
+        .ItemLink {
+            width: 200px;
+            border: 1px solid white;
+            height: 200px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

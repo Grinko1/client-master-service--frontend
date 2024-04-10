@@ -1,0 +1,23 @@
+{
+  "${TM_FILENAME_BASE} Component": {
+    "prefix": "reactComponent",
+    "body": [
+      "import { memo } from 'react';",
+      "import cls from './${TM_FILENAME_BASE}.module.scss';",
+      "import { classNames } from '@/shared/lib/classNames/classNames';",
+      "",
+      "interface ${TM_FILENAME_BASE}Props {",
+      "    className?: string;",
+      "}",
+      "",
+      "export const ${TM_FILENAME_BASE} = memo((props: ${TM_FILENAME_BASE}Props) => {",
+      "const { className } = props",
+      "  return (",
+      "    <div className={classNames(cls.${TM_FILENAME_BASE}, {}, [className])}>",
+      "    </div>",
+      "  );",
+      "});"
+    ],
+    "description": "Custom React Component"
+  }
+}
