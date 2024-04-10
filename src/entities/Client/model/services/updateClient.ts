@@ -1,23 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 
-import { Client, ClientForm } from '../types/client';
+import { Client, ClientDataProps } from '../types/client';
 
-interface UpdateClientProps {
-    id: number;
-    form: ClientForm;
 
-}
 
-export const updateClient = createAsyncThunk<Client, UpdateClientProps, ThunkConfig<string>>(
+export const updateClient = createAsyncThunk<Client, ClientDataProps, ThunkConfig<string>>(
     'client/updateClient',
-    async ({ id, form }, thunkApi) => {
+    async ({ id, name, phone }, thunkApi) => {
         const { extra, rejectWithValue, dispatch } = thunkApi;
-        form.id = id;
-        console.log(form);
+
 
         try {
-            const response = await extra.api.patch<Client>(`/api/clients/${id}`, form);
+            const response = await extra.api.patch<Client>(`/api/clients/${id}`, { id, name, phone });
             console.log(response);
 
             if (!response) {

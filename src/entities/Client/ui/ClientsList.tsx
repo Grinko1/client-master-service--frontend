@@ -5,32 +5,47 @@ import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch
 import { getClientsList, getClientsListError, getClientsListLoading } from '../model/selectors/getClientsList/getClientsList';
 import { useSelector } from 'react-redux';
 import { ClientModal } from './clientForm/clientModal/ClientModal';
-import { Client } from '../model/types/client';
+import { Client, ClientDataProps } from '../model/types/client';
 import { clientsActions } from '../model/slices/clientsSlice';
-import { getClientsWithVisits, getClientsWithVisitsError, getClientsWithVisitsLoading } from '@/entities/ClientWithVisits/model/selectors/getClientsWithVisits/getClientsWithVisits';
+import { updateClient } from '../model/services/updateClient';
+import { deleteClient } from '../model/services/deleteClient';
+
+
 
 interface ClientsListProps {
   className?: string;
   withVisits: boolean
 }
 
+
 export const ClientsList = memo((props: ClientsListProps) => {
   const { className, withVisits } = props
   const dispatch = useAppDispatch();
-  const clients = useSelector(withVisits ? getClientsWithVisits : getClientsList);
-  const isLoading = useSelector(withVisits ? getClientsWithVisitsLoading : getClientsListLoading);
-  const error = useSelector(withVisits ? getClientsWithVisitsError : getClientsListError);
+  const clients = useSelector(getClientsList);
+  const isLoading = useSelector(getClientsListLoading);
+  const error = useSelector(getClientsListError);
 
   const [isClientForm, setIsAClient] = useState(false);
   const onCloseModal = useCallback(() => {
     setIsAClient(false);
+    dispatch(clientsActions.resetForm())
   }, []);
 
   const onShowModal = useCallback((client: Client) => {
+    dispatch(clientsActions.setId(client.id))
     dispatch(clientsActions.setName(client.name));
     dispatch(clientsActions.setPhone(client.phone));
     setIsAClient(true);
   }, [clientsActions, dispatch]);
+
+
+  const handleFormAction = useCallback((data: ClientDataProps) => {
+    dispatch(updateClient(data))
+  }, [])
+  const handleDeleteClient = useCallback((id: number) => {
+    console.log("delete with id", id);
+    dispatch(deleteClient(id))
+  }, [])
 
   if (isLoading) {
     return (
@@ -69,10 +84,10 @@ export const ClientsList = memo((props: ClientsListProps) => {
           )}
           <div className={cls.actions}>
             <p onClick={() => onShowModal(cl)} className={cls.edit}>&#10000;</p>
-            <p className={cls.delete}>&#10007;</p></div>
+            <p className={cls.delete} onClick={() => handleDeleteClient(cl.id)}>&#10007;</p></div>
         </div>)
       }
-      {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title="update client profile" actionName='update' />}
+      {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title="update client profile" actionName='update' handleFormAction={handleFormAction} />}
     </div>
   );
 });

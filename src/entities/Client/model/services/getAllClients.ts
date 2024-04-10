@@ -6,14 +6,14 @@ import { Client } from '../types/client';
 
 export const getAllClients = createAsyncThunk<Client[], void, ThunkConfig<string>>(
   'client/getAllClients',
-  async ( id,thunkApi) => {
+  async (id, thunkApi) => {
     const { extra, rejectWithValue, dispatch } = thunkApi;
 
-    
+
     try {
-    const response = await extra.api.get<Client[]>('/api/clients');
-            console.log(response);
-            
+      const response = await extra.api.get<Client[]>('/api/clients/visits');
+      console.log(response);
+
       if (!response) {
         return rejectWithValue('Something went wrong');
       }

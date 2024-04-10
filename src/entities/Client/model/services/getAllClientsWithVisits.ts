@@ -1,19 +1,20 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
+import { Client } from '../types/client';
 
-import { ClientWithVisits } from '../types/client';
 
 
-export const getAllClientsWithVisits = createAsyncThunk<ClientWithVisits[], void, ThunkConfig<string>>(
+
+export const getAllClientsWithVisits = createAsyncThunk<Client[], void, ThunkConfig<string>>(
   'client/getAllClients',
-  async ( id,thunkApi) => {
+  async (id, thunkApi) => {
     const { extra, rejectWithValue, dispatch } = thunkApi;
 
-    
+
     try {
-    const response = await extra.api.get<ClientWithVisits[]>('/api/clients/visits');
-            console.log(response);
-            
+      const response = await extra.api.get<Client[]>('/api/clients/visits');
+      console.log(response);
+
       if (!response) {
         return rejectWithValue('Something went wrong');
       }

@@ -3,12 +3,12 @@ import cls from './ClientsPage.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getAllClients } from '@/entities/Client/model/services/getAllClients';
-import { getAllClientsWithVisits } from '@/entities/ClientWithVisits/model/services/getAllClientsWithVisits';
 import { ClientsList } from '@/entities/Client';
 import { ClientModal } from '@/entities/Client/ui/clientForm/clientModal/ClientModal';
-import { ClientsListWithVisits } from '@/entities/ClientWithVisits';
 import { Button } from '@/shared/ui/redesigned/Button/Button';
 import { Input } from '@/shared/ui/redesigned/Input/Input';
+import { addClient } from '@/entities/Client/model/services/addClient';
+import { ClientDataProps } from '@/entities/Client/model/types/client';
 
 interface ClientsPageProps {
     className?: string;
@@ -29,7 +29,6 @@ export const ClientsPage = memo((props: ClientsPageProps) => {
 
     useEffect(() => {
         dispatch(getAllClients())
-        dispatch(getAllClientsWithVisits())
     }, [])
 
     const [isClientForm, setIsAClient] = useState(false);
@@ -40,7 +39,9 @@ export const ClientsPage = memo((props: ClientsPageProps) => {
     const onShowModal = useCallback(() => {
         setIsAClient(true);
     }, []);
-    console.log(showWithVisits);
+    const handleFormAction = useCallback((data: ClientDataProps) => {
+        dispatch(addClient(data))
+    }, [])
     return (
         <div className={classNames(cls.ClientsPage, {}, [className])}>
             <h1>Clients page</h1>
@@ -58,9 +59,7 @@ export const ClientsPage = memo((props: ClientsPageProps) => {
 
             <hr />
             <ClientsList withVisits={showWithVisits} />
-            {/* {showWithVisits ? <ClientsListWithVisits /> : <ClientsList />} */}
-
-            {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title='Add client' actionName='add' />}
+            {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title='Add client' actionName='add' handleFormAction={handleFormAction} />}
             <br />
             <hr />
 

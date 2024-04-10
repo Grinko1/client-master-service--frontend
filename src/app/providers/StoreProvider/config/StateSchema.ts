@@ -1,5 +1,5 @@
 import {
-  AnyAction, EnhancedStore, Reducer, ReducersMapObject,
+    AnyAction, EnhancedStore, Reducer, ReducersMapObject,
 } from '@reduxjs/toolkit';
 import { CombinedState } from 'redux';
 import { AxiosInstance } from 'axios';
@@ -7,14 +7,12 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { UserSchema } from '@/entities/User';
 import { LoginSchema } from '@/features/authByEmail';
 import { ClientsSchema } from '@/entities/Client/model/types/client';
-import { ClientsWithVisitsSchema } from '@/entities/ClientWithVisits/model/types/client';
 
 export interface StateSchema {
     user: UserSchema;
     clients: ClientsSchema,
-    clientsWithVisits: ClientsWithVisitsSchema
     // ui: UISchema;
-    [rtkApi.reducerPath]:ReturnType<typeof rtkApi.reducer>
+    [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
     // Асинхронные редюсеры
     loginForm?: LoginSchema;

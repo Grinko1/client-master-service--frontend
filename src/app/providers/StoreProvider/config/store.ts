@@ -6,7 +6,6 @@ import { createReducerManager } from './reducerManager';
 import { rtkApi } from '@/shared/api/rtkApi';
 import { userReducer } from '@/entities/User';
 import { clientsReducer } from '@/entities/Client/model/slices/clientsSlice';
-import { clientsVisitsReducer } from '@/entities/ClientWithVisits/model/slices/clientsWithVisitsSlice';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -15,8 +14,7 @@ export function createReduxStore(
   const rootReducers: ReducersMapObject<StateSchema> = {
     ...asyncReducers,
     user: userReducer,
-    clients:clientsReducer,
-    clientsWithVisits: clientsVisitsReducer,
+    clients: clientsReducer,
     // ui: uiReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };

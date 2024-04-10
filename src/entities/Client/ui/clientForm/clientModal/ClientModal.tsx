@@ -3,8 +3,11 @@ import { Modal } from '@/shared/ui/redesigned/Modal/Modal';
 import { classNames } from '@/shared/lib/classNames/classNames';
 
 import { ClientFormAsync } from '../clientForm/ClientForm.async';
-import ClientForm from '../clientForm/ClientForm';
+import ClientForm, { ClientFormProps } from '../clientForm/ClientForm';
 import { time } from 'console';
+import { ClientDataProps } from '@/entities/Client/model/types/client';
+
+
 
 interface ClientModalProps {
   className?: string;
@@ -12,9 +15,10 @@ interface ClientModalProps {
   title: string;
   actionName: string;
   onClose: () => void;
+  handleFormAction: (data: ClientDataProps) => void
 }
 
-export const ClientModal = ({ className, isOpen, title, actionName, onClose }: ClientModalProps) => (
+export const ClientModal = ({ className, isOpen, title, actionName, onClose, handleFormAction }: ClientModalProps) => (
   <Modal
     className={classNames('', {}, [className])}
     isOpen={isOpen}
@@ -22,7 +26,7 @@ export const ClientModal = ({ className, isOpen, title, actionName, onClose }: C
     lazy
   >
     <Suspense fallback={<div>Loading....</div>}>
-      <ClientFormAsync onSuccess={onClose} title={title} actionName={actionName} />
+      <ClientFormAsync onSuccess={onClose} title={title} actionName={actionName} handleFormAction={handleFormAction} />
     </Suspense>
   </Modal>
 );

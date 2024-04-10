@@ -17,13 +17,13 @@ export interface ClientMasterInfo {
     name: string,
     description: string
 }
-export interface ClientForm {
-    id?: number;
+export interface ClientDataProps {
+    id: number | null;
     name: string,
     phone: string
 }
 export interface ClientsSchema {
-    form: ClientForm
+    form: ClientDataProps
     clients: Client[];
     isLoading: boolean;
     error?: string;
