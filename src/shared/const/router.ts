@@ -1,6 +1,8 @@
 export enum AppRoutes {
   MAIN = 'main',
   CLIENTS = "clients",
+  MASTERS = "masters",
+  VISITS = 'visits',
   // ABOUT = 'about',
   // PROFILE = 'profile',
   // ARTICLES = 'articles',
@@ -15,6 +17,10 @@ export enum AppRoutes {
 }
 export const getRouteMain = () => '/';
 export const getRouteClients = () => '/clients';
+export const getRouteMasters = () => '/masters';
+export const getRouteVisits = () => '/visits';
+
+
 export const getRouteAbout = () => '/about';
 export const getRouteProfile = (id: string) => `/profile/${id}`;
 export const getRouterArticleDetails = (id: string) => `/articles/${id}`;
@@ -28,6 +34,8 @@ export const getRouteNotFound = () => '*';
 
 export const AppRouteByPathPattern: Record<string, AppRoutes> = {
   [getRouteMain()]: AppRoutes.MAIN,
+  [getRouteClients()]: AppRoutes.CLIENTS,
+  [getRouteMasters()]: AppRoutes.MASTERS
   // [getRouteAbout()]: AppRoutes.ABOUT,
   // [getRouteProfile(':id')]: AppRoutes.PROFILE,
   // [getRouterArticleDetails(':id')]: AppRoutes.ARTICLE_DETAILS,
@@ -42,6 +50,8 @@ export const AppRouteByPathPattern: Record<string, AppRoutes> = {
 const RoutePath: Record<AppRoutes, string> = {
   [AppRoutes.MAIN]: getRouteMain(),
   [AppRoutes.CLIENTS]: getRouteClients(),
+  [AppRoutes.MASTERS]: getRouteMasters(),
+  [AppRoutes.VISITS]: getRouteVisits(),
   // [AppRoutes.ABOUT]: getRouteAbout(),
   // [AppRoutes.PROFILE]: getRouteProfile(':id'), // + :id
   // [AppRoutes.ARTICLES]: getRouteArticles(),

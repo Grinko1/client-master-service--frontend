@@ -1,0 +1,30 @@
+.MastersList {
+    margin: 50px auto;
+    width: 500px;
+
+    h2 {
+        padding: 20px 0;
+    }
+
+    .item {
+        border: 1px solid white;
+        padding: 20px;
+        position: relative;
+    }
+
+    .actions {
+        position: absolute;
+        top: 15px;
+        left: 93%;
+
+        .edit {
+            color: green;
+            cursor: pointer;
+        }
+
+        .delete {
+            color: #b90000;
+            cursor: pointer;
+        }
+    }
+}

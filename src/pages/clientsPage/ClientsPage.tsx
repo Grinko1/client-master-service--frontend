@@ -17,6 +17,7 @@ interface ClientsPageProps {
 export const ClientsPage = memo((props: ClientsPageProps) => {
     const { className } = props
     const dispatch = useAppDispatch();
+
     const [showWithVisits, setShowWithVisits] = useState(false)
     const [searchStr, setSearchStr] = useState("")
 
@@ -26,7 +27,6 @@ export const ClientsPage = memo((props: ClientsPageProps) => {
         },
         [dispatch],
     );
-
     useEffect(() => {
         dispatch(getAllClients())
     }, [])

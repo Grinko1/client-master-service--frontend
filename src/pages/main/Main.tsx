@@ -2,7 +2,7 @@ import { memo } from 'react';
 import cls from './Main.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Link } from 'react-router-dom';
-import { getRouteClients } from '@/shared/const/router';
+import { getRouteClients, getRouteMasters, getRouteVisits } from '@/shared/const/router';
 
 interface MainProps {
   className?: string;
@@ -29,8 +29,8 @@ export const Main = memo((props: MainProps) => {
     <div className={classNames(cls.Main, {}, [className])}>
       <div className={cls.MainBlock}>
         <Link to={getRouteClients()} className={cls.ItemLink}>Clients</Link>
-        <div className={cls.ItemLink}>Masters</div>
-        <div className={cls.ItemLink}>Visits</div>
+        <Link to={getRouteMasters()} className={cls.ItemLink}>Masters</Link>
+        <Link to={getRouteVisits()} className={cls.ItemLink}>Visits</Link>
       </div>
 
     </div>

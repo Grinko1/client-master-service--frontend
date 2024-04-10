@@ -10,14 +10,18 @@ import {
   getRouteClients,
   getRouteForbidden,
   getRouteMain,
+  getRouteMasters,
   getRouteNotFound,
   getRouteProfile,
   getRouteSettings,
+  getRouteVisits,
   getRouterArticleDetails,
 } from '@/shared/const/router';
 import { Main } from '@/pages/main/Main';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ClientsPage } from '@/pages/clientsPage/ClientsPage';
+import { MastersPage } from '@/pages/mastersPage/MastersPage';
+import { VisitsPage } from '@/pages/visitsPage/VisitsPage';
 
 
 export type AppRoutesProps = RouteProps & {
@@ -33,6 +37,14 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.CLIENTS]: {
     path: getRouteClients(),
     element: <ClientsPage />,
+  },
+  [AppRoutes.MASTERS]: {
+    path: getRouteMasters(),
+    element: <MastersPage />,
+  },
+  [AppRoutes.VISITS]: {
+    path: getRouteVisits(),
+    element: <VisitsPage />,
   },
   // [AppRoutes.ABOUT]: {
   //   path: getRouteAbout(),
