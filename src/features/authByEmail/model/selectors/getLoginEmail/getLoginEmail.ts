@@ -1,3 +1,5 @@
 import { StateSchema } from '@/app/providers/StoreProvider';
 
-export const getLoginEmail = (state: StateSchema) => state?.loginForm?.email || '';
+const email = localStorage.getItem("email") !== null ? String(localStorage.getItem("email")) : '';
+
+export const getLoginEmail = (state: StateSchema) => state?.loginForm?.email || email;

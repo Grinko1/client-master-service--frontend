@@ -7,6 +7,7 @@ import { rtkApi } from '@/shared/api/rtkApi';
 import { userReducer } from '@/entities/User';
 import { clientsReducer } from '@/entities/Client/model/slices/clientsSlice';
 import { mastersReducer } from '@/entities/Master';
+import { visitsReducer } from '@/entities/Visit';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -17,6 +18,7 @@ export function createReduxStore(
     user: userReducer,
     clients: clientsReducer,
     masters: mastersReducer,
+    visits: visitsReducer,
     // ui: uiReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };

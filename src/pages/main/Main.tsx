@@ -1,8 +1,12 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import cls from './Main.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { Link } from 'react-router-dom';
-import { getRouteClients, getRouteMasters, getRouteVisits } from '@/shared/const/router';
+import { getRouteClientAppointment, getRouteClients, getRouteMasters, getRouteVisits } from '@/shared/const/router';
+import { getAllClients } from '@/entities/Client/model/services/getAllClients';
+import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useSelector } from 'react-redux';
+import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
 
 interface MainProps {
   className?: string;
@@ -10,6 +14,7 @@ interface MainProps {
 
 export const Main = memo((props: MainProps) => {
   const { className } = props
+  const role = useSelector(getLoginRole)
 
 
   // useEffect(()=>{
@@ -28,11 +33,13 @@ export const Main = memo((props: MainProps) => {
   return (
     <div className={classNames(cls.Main, {}, [className])}>
       <div className={cls.MainBlock}>
-        <Link to={getRouteClients()} className={cls.ItemLink}>Clients</Link>
-        <Link to={getRouteMasters()} className={cls.ItemLink}>Masters</Link>
-        <Link to={getRouteVisits()} className={cls.ItemLink}>Visits</Link>
+        {role.role !== "Клиент" ? < Link to={getRouteClients()} className={cls.ItemLink}>Clients</Link>
+          :
+          <Link to={getRouteClientAppointment()} className={cls.ItemLink}>Записаться</Link>}
+        <Link to={getRouteMasters()} className={cls.ItemLink}>Мастера</Link>
+        <Link to={getRouteVisits()} className={cls.ItemLink}>Визиты</Link>
       </div>
 
-    </div>
+    </div >
   );
 });

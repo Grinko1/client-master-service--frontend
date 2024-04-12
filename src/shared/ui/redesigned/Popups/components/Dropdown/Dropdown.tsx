@@ -12,6 +12,7 @@ export interface DropdownItem {
   content?: ReactNode;
   onClick?: () => void;
   href?: string;
+  isSelected?: boolean;
 }
 
 interface DropdownProps {
@@ -38,6 +39,7 @@ export function Dropdown(props: DropdownProps) {
               onClick={item.onClick}
               className={classNames(cls.item, {
                 [popupCls.active]: active,
+                [popupCls.selected]: item.isSelected,
               })}>
               {item.content}
             </button>

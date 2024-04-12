@@ -8,11 +8,13 @@ import { UserSchema } from '@/entities/User';
 import { LoginSchema } from '@/features/authByEmail';
 import { ClientsSchema } from '@/entities/Client/model/types/client';
 import { MastersSchema } from '@/entities/Master';
+import { VisitsSchema } from '@/entities/Visit';
 
 export interface StateSchema {
     user: UserSchema;
     clients: ClientsSchema,
     masters: MastersSchema,
+    visits: VisitsSchema,
     // ui: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 

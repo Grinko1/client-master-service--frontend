@@ -12,6 +12,7 @@ const initialState: ClientsSchema = {
     name: '',
     phone: ''
   },
+
   isLoading: false,
   error: undefined
 };

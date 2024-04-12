@@ -1,2 +1,4 @@
+export { logoutService } from './model/services/logoutService';
+
 export { LoginModal } from './ui/LoginModal/LoginModal';
-export type { LoginSchema } from './model/types/loginSchema';
+export type { LoginSchema, Role } from './model/types/loginSchema';

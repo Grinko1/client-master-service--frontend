@@ -7,6 +7,7 @@ import {
   getRouteArticleCreate,
   getRouteArticles,
   getRouteArticlesEdit,
+  getRouteClientAppointment,
   getRouteClients,
   getRouteForbidden,
   getRouteMain,
@@ -22,6 +23,7 @@ import { NotFoundPage } from '@/pages/NotFoundPage';
 import { ClientsPage } from '@/pages/clientsPage/ClientsPage';
 import { MastersPage } from '@/pages/mastersPage/MastersPage';
 import { VisitsPage } from '@/pages/visitsPage/VisitsPage';
+import { ClientAppointment } from '@/pages/clientAppointment/ClientAppointment';
 
 
 export type AppRoutesProps = RouteProps & {
@@ -46,6 +48,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     path: getRouteVisits(),
     element: <VisitsPage />,
   },
+  [AppRoutes.CLIENTAPPOINTMENT]: {
+    path: getRouteClientAppointment(),
+    element: <ClientAppointment />,
+  },
+
   // [AppRoutes.ABOUT]: {
   //   path: getRouteAbout(),
   //   element: <AboutPage />,

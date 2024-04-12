@@ -23,6 +23,7 @@ export interface ClientDataProps {
     phone: string
 }
 export interface ClientsSchema {
+
     form: ClientDataProps
     clients: Client[];
     isLoading: boolean;
