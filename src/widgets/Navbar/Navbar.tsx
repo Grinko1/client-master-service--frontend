@@ -1,7 +1,7 @@
 import { memo, useCallback, useState } from 'react';
 import cls from './Navbar.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { LoginModal, logoutService } from '@/features/authByEmail';
+import { LoginModal, getProfileData, logoutService } from '@/features/authByEmail';
 import { Link } from 'react-router-dom';
 import { getRouteMain } from '@/shared/const/router';
 import { useSelector } from 'react-redux';
@@ -20,6 +20,7 @@ export const Navbar = memo((props: NavbarProps) => {
   const dispatch = useAppDispatch()
   const email = useSelector(getLoginEmail)
   const role = useSelector(getLoginRole)
+  const profile = useSelector(getProfileData)
 
   const logoutHandler = useCallback(() => {
     dispatch(logoutService())
@@ -42,7 +43,7 @@ export const Navbar = memo((props: NavbarProps) => {
         {isAuth ?
           <div className={cls.authActions}>
             <h3>{role.role}</h3>
-            <p>{email}</p>
+            {profile?.name ? <p>{profile.name}</p> : <p>{email}</p>}
             <Button onClick={logoutHandler}>Выйти</Button>
 
           </div>

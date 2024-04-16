@@ -4,11 +4,18 @@ export interface LoginSchema {
     email: string | undefined;
     password: string;
     role: Role | null,
+    profile: Profile,
     isLoading: boolean;
     error?: string;
 }
 
 export interface Role {
-    id: number,
+    id: string,
     role: string
+}
+export interface Profile {
+    id: number | null,
+    name: string,
+    phone?: string,
+    description?: string
 }

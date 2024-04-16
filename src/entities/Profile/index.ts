@@ -1,0 +1,1 @@
+export { type ClientProfile } from './model/types/clientProfile'

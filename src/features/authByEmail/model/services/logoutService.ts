@@ -24,6 +24,7 @@ export const logoutService = createAsyncThunk<
             localStorage.removeItem("TOKEN")
             localStorage.removeItem("email")
             localStorage.removeItem("role")
+            localStorage.removeItem("profile")
             dispatch(loginActions.logout());
 
         } catch (e) {

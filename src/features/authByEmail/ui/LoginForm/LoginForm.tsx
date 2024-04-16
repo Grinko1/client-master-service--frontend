@@ -58,7 +58,7 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   );
 
   const onLoginClick = useCallback(async () => {
-    const result = await dispatch(login({ email, password }));
+    const result = await dispatch(login({ email, password, role: currentRole.id }));
     if (result.meta.requestStatus === 'fulfilled') {
       localStorage.setItem("email", email)
       localStorage.setItem("role", JSON.stringify(currentRole))
@@ -71,7 +71,8 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const dropdownRolesItems = roles.map((role) => ({
     content: role.role,
     onClick: () => {
-      setCurrentRole(role)
+      setCurrentRole(prevRole => role)
+      console.log(role);
       dispatch(loginActions.setRole(role))
     },
     isSelected: role.id === currentRole.id

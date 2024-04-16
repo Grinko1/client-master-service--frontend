@@ -7,7 +7,13 @@ const initialState: LoginSchema = {
   isLoading: false,
   email: '',
   password: '',
-  role: null
+  role: null,
+  profile: {
+    id: null,
+    name: "",
+    phone: "",
+    description: ""
+  }
 };
 
 export const loginSlice = createSlice({
@@ -35,8 +41,15 @@ export const loginSlice = createSlice({
         state.error = undefined;
         state.isLoading = true;
       })
-      .addCase(login.fulfilled, (state) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
+        if (action.payload.profile !== null) {
+          state.profile.id = action.payload.profile.id
+          state.profile.name = action.payload.profile.name
+          state.profile.phone = action.payload.profile?.phone
+          state.profile.description = action.payload.profile?.description
+        }
+
       })
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;

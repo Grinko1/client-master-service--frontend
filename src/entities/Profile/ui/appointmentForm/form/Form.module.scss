@@ -1,0 +1,22 @@
+.LoginForm {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+}
+
+.input {
+    margin-top: 10px;
+}
+
+.loginBtn {
+    margin-top: 15px;
+    margin-left: auto;
+}
+
+.dropdownBlock {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0 10px;
+}
