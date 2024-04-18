@@ -39,9 +39,7 @@ export const ClientsList = memo((props: ClientsListProps) => {
   }, [clientsActions, dispatch]);
 
 
-  const handleFormAction = useCallback((data: ClientDataProps) => {
-    dispatch(updateClient(data))
-  }, [])
+
   const handleDeleteClient = useCallback((id: number) => {
     console.log("delete with id", id);
     dispatch(deleteClient(id))
@@ -87,7 +85,7 @@ export const ClientsList = memo((props: ClientsListProps) => {
             <p className={cls.delete} onClick={() => handleDeleteClient(cl.id)}>&#10007;</p></div>
         </div>)
       }
-      {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title="update client profile" actionName='update' handleFormAction={handleFormAction} />}
+      {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title="update client profile" actionName='update' />}
     </div>
   );
 });

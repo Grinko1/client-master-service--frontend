@@ -17,8 +17,6 @@ $api.interceptors.request.use((config) => {
   const token = localStorage.getItem("TOKEN");
   if (token) {
     if (config.headers) {
-      console.log(token, " inside interseptors");
-
       config.headers.Authorization = token;
     }
 

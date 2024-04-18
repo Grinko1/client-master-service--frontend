@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { LoginSchema } from '../types/loginSchema';
 import { login } from '../services/loginByEmail/loginByEmail';
+import { roles } from '../../consts/consts';
+import { signUpService } from '../services/signUp.ts/signUp';
 
 
 const initialState: LoginSchema = {
   isLoading: false,
+  userId: undefined,
   email: '',
   password: '',
-  role: null,
+  role: roles[1],
   profile: {
     id: null,
     name: "",
@@ -32,7 +35,7 @@ export const loginSlice = createSlice({
     logout: (state) => {
       state.email = ''
       state.password = ''
-      state.role = null
+      state.role = undefined
     }
   },
   extraReducers: (builder) => {
@@ -49,9 +52,20 @@ export const loginSlice = createSlice({
           state.profile.phone = action.payload.profile?.phone
           state.profile.description = action.payload.profile?.description
         }
-
       })
       .addCase(login.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(signUpService.pending, (state) => {
+        state.error = undefined;
+        state.isLoading = true;
+      })
+      .addCase(signUpService.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.userId = action.payload.userId
+      })
+      .addCase(signUpService.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });

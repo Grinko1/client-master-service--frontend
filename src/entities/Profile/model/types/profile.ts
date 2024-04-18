@@ -1,4 +1,4 @@
-export interface Profile {
+export interface ProfileSchema {
     id: number | null,
     name: string,
     phone?: string,

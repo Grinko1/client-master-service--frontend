@@ -3,7 +3,8 @@ import { UserRole } from "@/entities/User";
 export interface LoginSchema {
     email: string | undefined;
     password: string;
-    role: Role | null,
+    userId?: number,
+    role?: Role,
     profile: Profile,
     isLoading: boolean;
     error?: string;

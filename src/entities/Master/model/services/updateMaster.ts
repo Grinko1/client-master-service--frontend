@@ -2,9 +2,15 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Master, MasterDataProps } from "../types/master";
 import { ThunkConfig } from "@/app/providers/StoreProvider";
 
+interface MasterData {
+    id: number,
+    name?: string,
+    description?: string
+
+}
 
 
-export const updateMaster = createAsyncThunk<Master, MasterDataProps, ThunkConfig<string>>(
+export const updateMaster = createAsyncThunk<Master, MasterData, ThunkConfig<string>>(
     'master/updateMaster',
     async ({ id, name, description }, thunkApi) => {
         const { extra, rejectWithValue, dispatch } = thunkApi;

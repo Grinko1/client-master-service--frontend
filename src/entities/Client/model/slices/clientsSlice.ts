@@ -67,6 +67,9 @@ export const clientsSlice = createSlice({
     builder.addCase(updateClient.fulfilled, (state, action) => {
       state.error = undefined;
       state.isLoading = false;
+      state.form.id = action.payload.id
+      state.form.name = action.payload.name
+      state.form.phone = action.payload.phone
     });
     builder.addCase(updateClient.rejected, (state, action) => {
       state.error = action.payload;

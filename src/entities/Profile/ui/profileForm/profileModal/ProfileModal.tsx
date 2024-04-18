@@ -1,13 +1,11 @@
 import { Suspense } from 'react';
 import { Modal } from '@/shared/ui/redesigned/Modal/Modal';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { FormAsync } from '../form/Form.async';
+import { ProfileFormAsync } from '../profileForm/ProfileForm.async';
 
 
 
-
-
-interface AppointmentModalProps {
+interface ProfileModalProps {
   className?: string;
   isOpen: boolean;
   title: string;
@@ -15,7 +13,7 @@ interface AppointmentModalProps {
   onClose: () => void;
 }
 
-export const AppointmentModal = ({ className, isOpen, title, actionName, onClose }: AppointmentModalProps) => (
+export const ProfileModal = ({ className, isOpen, title, actionName, onClose }: ProfileModalProps) => (
   <Modal
     className={classNames('', {}, [className])}
     isOpen={isOpen}
@@ -23,7 +21,7 @@ export const AppointmentModal = ({ className, isOpen, title, actionName, onClose
     lazy
   >
     <Suspense fallback={<div>Loading....</div>}>
-      <FormAsync onSuccess={onClose} title={title} actionName={actionName} />
+      <ProfileFormAsync onSuccess={onClose} title={title} actionName={actionName} />
     </Suspense>
   </Modal>
 );

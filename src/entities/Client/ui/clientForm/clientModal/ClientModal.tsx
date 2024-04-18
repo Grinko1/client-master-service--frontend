@@ -15,10 +15,9 @@ interface ClientModalProps {
   title: string;
   actionName: string;
   onClose: () => void;
-  handleFormAction: (data: ClientDataProps) => void
 }
 
-export const ClientModal = ({ className, isOpen, title, actionName, onClose, handleFormAction }: ClientModalProps) => (
+export const ClientModal = ({ className, isOpen, title, actionName, onClose }: ClientModalProps) => (
   <Modal
     className={classNames('', {}, [className])}
     isOpen={isOpen}
@@ -26,7 +25,7 @@ export const ClientModal = ({ className, isOpen, title, actionName, onClose, han
     lazy
   >
     <Suspense fallback={<div>Loading....</div>}>
-      <ClientFormAsync onSuccess={onClose} title={title} actionName={actionName} handleFormAction={handleFormAction} />
+      <ClientFormAsync onSuccess={onClose} title={title} actionName={actionName} />
     </Suspense>
   </Modal>
 );

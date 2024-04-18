@@ -20,7 +20,8 @@ export interface ClientMasterInfo {
 export interface ClientDataProps {
     id: number | null;
     name: string,
-    phone: string
+    phone?: string,
+    userId?: number
 }
 export interface ClientsSchema {
 

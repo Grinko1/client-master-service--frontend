@@ -59,7 +59,7 @@ export const ClientsPage = memo((props: ClientsPageProps) => {
 
             <hr />
             <ClientsList withVisits={showWithVisits} />
-            {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title='Add client' actionName='add' handleFormAction={handleFormAction} />}
+            {isClientForm && <ClientModal isOpen={isClientForm} onClose={onCloseModal} title='Add client' actionName='add' />}
             <br />
             <hr />
 

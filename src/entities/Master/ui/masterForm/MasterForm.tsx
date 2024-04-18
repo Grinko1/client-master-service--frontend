@@ -65,7 +65,7 @@ const MasterForm = memo(({ className, onSuccess, title, actionName }: MasterForm
         }
       } else {
         console.log("in save", id);
-        const result = await dispatch(addMaster({ id, name, description }));
+        const result = await dispatch(addMaster({ name, description }));
         if (addMaster.fulfilled.match(result)) {
           onSuccess();
           forceUpdate();
