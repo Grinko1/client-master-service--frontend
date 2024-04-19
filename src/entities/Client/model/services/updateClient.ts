@@ -12,7 +12,7 @@ interface ClientData {
     id: number,
     name?: string,
     phone?: string,
-    userId?: number
+    user_id?: number
 }
 
 export const updateClient = createAsyncThunk<Client, ClientData, ThunkConfig<string>>(
@@ -22,8 +22,9 @@ export const updateClient = createAsyncThunk<Client, ClientData, ThunkConfig<str
 
         const currentUserId = getProfileId(getState());
         const userId = localStorage.getItem("userId")
+        console.log(userId, name, phone);
         try {
-            const response = await extra.api.patch<Client>(`/api/clients/${id}`, { id, name, phone, userId });
+            const response = await extra.api.patch<Client>(`/api/clients/${id}`, { id, name, phone, user_id: userId });
             console.log(response);
             if (currentUserId !== null && currentUserId === id) {
                 localStorage.setItem("profile", JSON.stringify({ id, name, phone }))

@@ -12,10 +12,10 @@ import { getClientsListError, getClientsListLoading } from '@/entities/Client/mo
 import { updateClient } from '@/entities/Client/model/services/updateClient';
 import { addClient } from '@/entities/Client/model/services/addClient';
 import { getProfileDescription, getProfileId, getProfileName, getProfilePhone } from '@/entities/Profile/model/selectors/getProfile';
-import { profileActions } from '@/entities/Profile/model/slices/profileSlice';
 import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
 import { updateMaster } from '@/entities/Master/model/services/updateMaster';
 import { addMaster } from '@/entities/Master/model/services/addMaster';
+import { profileActions } from '@/entities/Profile/model/slices/profileSlice';
 
 
 
@@ -38,10 +38,6 @@ const ProfileForm = memo(({ className, onSuccess, title, actionName }: ProfileFo
   const phone = useSelector(getProfilePhone);
   const description = useSelector(getProfileDescription)
 
-  const [nameS, setNameS] = useState(name)
-  const [phoneS, setPhoneS] = useState(phone)
-  const [descriptionS, setDescriptionS] = useState(description)
-
   const role = useSelector(getLoginRole)
 
 
@@ -52,37 +48,32 @@ const ProfileForm = memo(({ className, onSuccess, title, actionName }: ProfileFo
 
   const onChangeName = useCallback(
     (value: string) => {
-      // dispatch(profileActions.setName(value));
-      setNameS(value)
+      dispatch(profileActions.setName(value));
     },
     [dispatch],
   );
 
   const onChangePhone = useCallback(
     (value: string) => {
-      // dispatch(profileActions.setPhone(value));
-      setPhoneS(value)
+      dispatch(profileActions.setPhone(value));
     },
     [dispatch],
   );
   const onChangeDescription = useCallback(
     (value: string) => {
-      // dispatch(profileActions.setDescription(value));
-      setDescriptionS(value)
+      dispatch(profileActions.setDescription(value));
     },
     [dispatch],
   );
+  console.log("id", id, "name", name, "phone", phone);
   const onActionClick = useCallback(async () => {
-    console.log("here", role.id === "CLIENT_ROLE", role);
     try {
       let result;
       if (role.id === "CLIENT_ROLE") {
-        console.log("inside role client");
-        result = id !== null ? await dispatch(updateClient({ id: id as number, name: nameS, phone: phoneS })) : await dispatch(addClient({ name: nameS, phone: phoneS }));
+        result = id !== null && id !== undefined ? await dispatch(updateClient({ id: id as number, name, phone })) : await dispatch(addClient({ name, phone }));
         console.log(`Update ${role.role.toLowerCase()} result:`, result);
       } else if (role.id === "MASTER_ROLE") {
-        console.log("inside role master");
-        result = id !== null ? await dispatch(updateMaster({ id: id as number, name: nameS, description: descriptionS })) : await dispatch(addMaster({ name: nameS, description: descriptionS }));
+        result = id !== null ? await dispatch(updateMaster({ id: id as number, name, description })) : await dispatch(addMaster({ name, description }));
         console.log(`Update ${role.role.toLowerCase()} result:`, result);
       }
 
@@ -162,21 +153,21 @@ const ProfileForm = memo(({ className, onSuccess, title, actionName }: ProfileFo
         className={cls.input}
         placeholder={t('Введите имя')}
         onChange={onChangeName}
-        value={nameS}
+        value={name}
       />
       {role.id === "CLIENT_ROLE" && < Input
         type='text'
         className={cls.input}
         placeholder={t('Введите телефон')}
         onChange={onChangePhone}
-        value={phoneS}
+        value={phone}
       />}
       {role.id === "MASTER_ROLE" && < Input
         type='text'
         className={cls.input}
         placeholder={t('Введите описание')}
         onChange={onChangeDescription}
-        value={descriptionS}
+        value={description}
       />}
       <Button
         variant='outline'

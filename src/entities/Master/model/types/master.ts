@@ -2,6 +2,7 @@ export interface Master {
     id: number,
     name: string,
     description: string,
+    user_id?: number,
     visits: ClientVisit[]
 }
 export interface ClientVisit {

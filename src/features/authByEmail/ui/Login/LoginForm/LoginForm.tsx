@@ -46,32 +46,39 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
   const [currentRole, setCurrentRole] = useState(roles[1])
   const [isSignUp, setIsSignUp] = useState(false)
 
-  console.log("role from redux", role);
+  const [curEmail, setCurEmail] = useState("")
+  const [curPassword, setCurPassword] = useState("")
+
+
   const forceUpdate = useForceUpdate()
 
   const onChangeEmail = useCallback(
     (value: string) => {
-      dispatch(loginActions.setEmail(value));
+      // dispatch(loginActions.setEmail(value));
+      setCurEmail(value)
     },
     [dispatch],
   );
 
   const onChangePassword = useCallback(
     (value: string) => {
-      dispatch(loginActions.setPassword(value));
+      // dispatch(loginActions.setPassword(value));
+      setCurPassword(value)
     },
     [dispatch],
   );
 
 
   const onLoginClick = useCallback(async () => {
-    const result = await dispatch(login({ email, password }))
+    dispatch(loginActions.setEmail(curEmail));
+    dispatch(loginActions.setPassword(curPassword));
+    const result = await dispatch(login({ email: curEmail, password: curPassword }))
     if (result.meta.requestStatus === 'fulfilled') {
-      localStorage.setItem("email", email)
+      localStorage.setItem("email", curEmail)
       onSuccess();
       forceUpdate()
     }
-  }, [dispatch, email, password, onSuccess, forceUpdate]);
+  }, [dispatch, curEmail, curPassword, onSuccess, forceUpdate]);
 
   const onSignUpClick = useCallback(async () => {
     console.log(role);
@@ -108,14 +115,14 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
           className={cls.input}
           placeholder={t('Введите email')}
           onChange={onChangeEmail}
-          value={email}
+          value={curEmail}
         />
         <Input
           type='text'
           className={cls.input}
           placeholder={t('Введите пароль')}
           onChange={onChangePassword}
-          value={password}
+          value={curPassword}
         />
         {isSignUp ?
           <>

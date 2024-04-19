@@ -2,6 +2,7 @@ export interface Client {
     id: number,
     name: string,
     phone: string,
+    user_id?: number,
     visits: ClientVisit[]
 }
 export interface ClientVisit {
