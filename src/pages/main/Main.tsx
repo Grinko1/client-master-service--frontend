@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { getRouteClientAppointment, getRouteClients, getRouteMasters, getRouteVisits } from '@/shared/const/router';
 import { useSelector } from 'react-redux';
 import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
+import { VisitModal } from '@/entities/Visit/ui/visitModal/VisitModal';
 // import { AppointmentModal } from '@/entities/Profile/ui/appointmentForm/modal/AppointmentModal';
 // import { getProfileData } from '@/features/authByEmail';
 
@@ -35,6 +36,7 @@ export const Main = memo((props: MainProps) => {
         <Link to={getRouteVisits()} className={cls.ItemLink}>Визиты</Link>
       </div>
       {/* {isOpenModal && <AppointmentModal isOpen={isOpenModal} onClose={onCloseModal} title="Форма записи" actionName='записаться' />} */}
+      {isOpenModal && <VisitModal isOpen={isOpenModal} onClose={onCloseModal} title="Форма записи" actionName='записаться' />}
     </div >
   );
 });

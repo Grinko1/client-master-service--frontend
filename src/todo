@@ -1,0 +1,7 @@
+login / logout update(rerender) state
+dropdown add scroll
+for CLIENT
+on server do user_id unique , to return one result
+add appointment for client (1 date, time, master, and clientId add in service 2 if no profile then firstly add client)
+masters page in actions add button add visit ( masterId and clientId field in service)
+visits page show only this client visits

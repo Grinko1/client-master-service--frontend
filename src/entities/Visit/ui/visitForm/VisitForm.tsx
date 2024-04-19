@@ -22,6 +22,8 @@ import moment from 'moment';
 import { Dropdown } from '@/shared/ui/redesigned/Popups';
 import { ClientInfo, MasterInfo } from '../../model/types/visit';
 import { getMastersList } from '@/entities/Master/model/selectors/getMastersList';
+import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
+import { getProfileId } from '@/entities/Profile/model/selectors/getProfile';
 
 
 export interface VisitFormProps {
@@ -36,10 +38,13 @@ export interface VisitFormProps {
 const VisitForm = memo(({ className, onSuccess, title, actionName }: VisitFormProps) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const role = useSelector(getLoginRole)
+  const profileId = useSelector(getProfileId)
+  console.log("profileId", profileId, "role", role);
   const [currentClient, setCurrentClient] = useState<ClientInfo | null>(null)
   const [currentMaster, setCurrentMaster] = useState<MasterInfo | null>(null)
 
-  const { id, date, time, masterId, clientId } = useSelector(getVisitForm);
+  let { id, date, time, masterId, clientId } = useSelector(getVisitForm);
   const clients = useSelector(getClientsList)
   const masters = useSelector(getMastersList)
 
@@ -95,6 +100,12 @@ const VisitForm = memo(({ className, onSuccess, title, actionName }: VisitFormPr
 
   const onActionClick = useCallback(async () => {
     console.log({ id, date, time, masterId, clientId });
+    if (role.id = "CLIENT_ROLE" && profileId) {
+      clientId = profileId;
+    } else if (role.id = "MASTER_ROLE" && profileId) {
+      masterId = profileId;
+    }
+    console.log(id, date, time, masterId, clientId);
     try {
       if (id !== null) {
         const result = await dispatch(updateVisit({ id, date, time, masterId, clientId }));
@@ -105,6 +116,7 @@ const VisitForm = memo(({ className, onSuccess, title, actionName }: VisitFormPr
           console.error('Update visit failed:', result.error);
         }
       } else {
+
         const result = await dispatch(addVisit({ id, date, time, masterId, clientId }));
         if (addVisit.fulfilled.match(result)) {
           onSuccess();
@@ -140,15 +152,15 @@ const VisitForm = memo(({ className, onSuccess, title, actionName }: VisitFormPr
         onChange={onChangeTime}
         value={formattedTime}
       />
-      <div className={cls.dropdownBlock}>
+      {role.id !== "CLIENT_ROLE" && <div className={cls.dropdownBlock}>
         <Dropdown
           trigger={<Button>Chooze client</Button>}
           items={dropdownClientItems}
         />
         <div>{currentClient?.name}</div>
-      </div>
+      </div>}
 
-      <div className={cls.dropdownBlock}>
+      {role.id !== "MASTER_ROLE" && <div className={cls.dropdownBlock}>
         <Dropdown
           trigger={<Button>Chooze master</Button>}
           items={dropdownMasterItems}
@@ -156,7 +168,7 @@ const VisitForm = memo(({ className, onSuccess, title, actionName }: VisitFormPr
         <div>{currentMaster?.name}</div>
       </div>
 
-
+      }
       <Button
         variant='outline'
         className={cls.loginBtn}
