@@ -2,12 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import {
-  DynamicModuleLoader,
-  ReducersList,
-} from '@/shared/lib/components/DynamicModuleLoader/DynamicModuleLoader';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
-// import { loginActions, loginReducer } from '../../model/slice/loginSlice';
 import cls from './VisitForm.module.scss';
 import { Text } from '@/shared/ui/redesigned/Text';
 import { Input } from '@/shared/ui/redesigned/Input/Input';
@@ -131,7 +126,6 @@ const VisitForm = memo(({ className, onSuccess, title, actionName }: VisitFormPr
   }, [dispatch, date, time, masterId, clientId, onSuccess, forceUpdate]);
 
   return (
-    // <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
     <div className={classNames(cls.LoginForm, {}, [className])}>
       <Text title={title} />
       {error && (
@@ -179,7 +173,6 @@ const VisitForm = memo(({ className, onSuccess, title, actionName }: VisitFormPr
 
 
     </div>
-    // </DynamicModuleLoader>
   );
 });
 

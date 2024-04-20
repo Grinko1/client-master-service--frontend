@@ -1,4 +1,4 @@
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import cls from './VisitsList.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useSelector } from 'react-redux';
@@ -8,6 +8,8 @@ import { visitsActions } from '../../model/slices/visitSlice';
 import { Visit } from '../../model/types/visit';
 import { getVisitsList } from '../../model/selectors/getVisitsList';
 import { VisitModal } from '../visitModal/VisitModal';
+import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
+import { getProfileId } from '@/entities/Profile/model/selectors/getProfile';
 
 
 interface VisitsListProps {
@@ -17,7 +19,7 @@ interface VisitsListProps {
 export const VisitsList = memo((props: VisitsListProps) => {
     const { className } = props
     const dispatch = useAppDispatch();
-    const visits = useSelector(getVisitsList)
+    let visits = useSelector(getVisitsList)
     const [isVisitForm, setIsVisitModal] = useState(false);
 
 

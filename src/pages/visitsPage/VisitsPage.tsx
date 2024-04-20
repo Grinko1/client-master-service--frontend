@@ -9,6 +9,9 @@ import { getAllVisits } from '@/entities/Visit/model/services/getAllVisits';
 import { getAllClients } from '@/entities/Client/model/services/getAllClients';
 import { getAllMasters } from '@/entities/Master';
 import { VisitModal } from '@/entities/Visit/ui/visitModal/VisitModal';
+import { useSelector } from 'react-redux';
+import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
+import { getProfileId } from '@/entities/Profile/model/selectors/getProfile';
 
 interface VisitsPageProps {
     className?: string;
@@ -17,10 +20,20 @@ interface VisitsPageProps {
 export const VisitsPage = memo((props: VisitsPageProps) => {
     const { className } = props
     const dispatch = useAppDispatch();
+    const role = useSelector(getLoginRole)
+    const profileId = useSelector(getProfileId)
 
     useEffect(() => {
+        if (role.id = "CLIENT_ROLE") {
+            console.log("dispatch", "/api/visits/client/28");
+        } else if (role.is === "MASTER_ROLE") {
+            console.log("dispatch", "/api/visits/master/28");
+        } else {
+            dispatch(getAllVisits())
+        }
         dispatch(getAllClients())
         dispatch(getAllMasters())
+        dispatch(getAllVisits())
     }, [])
 
     const [isVisitForm, setIsVisitsForm] = useState(false);
@@ -32,9 +45,7 @@ export const VisitsPage = memo((props: VisitsPageProps) => {
         },
         [dispatch],
     );
-    useEffect(() => {
-        dispatch(getAllVisits())
-    }, [])
+
 
     const onCloseModal = useCallback(() => {
         setIsVisitsForm(false);

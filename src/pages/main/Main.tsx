@@ -6,8 +6,6 @@ import { getRouteClientAppointment, getRouteClients, getRouteMasters, getRouteVi
 import { useSelector } from 'react-redux';
 import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
 import { VisitModal } from '@/entities/Visit/ui/visitModal/VisitModal';
-// import { AppointmentModal } from '@/entities/Profile/ui/appointmentForm/modal/AppointmentModal';
-// import { getProfileData } from '@/features/authByEmail';
 
 interface MainProps {
   className?: string;
@@ -29,13 +27,12 @@ export const Main = memo((props: MainProps) => {
   return (
     <div className={classNames(cls.Main, {}, [className])}>
       <div className={cls.MainBlock}>
-        {role.role !== "Клиент" ? < Link to={getRouteClients()} className={cls.ItemLink}>Clients</Link>
+        {role.id !== "CLIENT_ROLE" ? < Link to={getRouteClients()} className={cls.ItemLink}>Clients</Link>
           :
           <div className={cls.ItemLink} onClick={onShowModal}>Записаться</div>}
         <Link to={getRouteMasters()} className={cls.ItemLink}>Мастера</Link>
         <Link to={getRouteVisits()} className={cls.ItemLink}>Визиты</Link>
       </div>
-      {/* {isOpenModal && <AppointmentModal isOpen={isOpenModal} onClose={onCloseModal} title="Форма записи" actionName='записаться' />} */}
       {isOpenModal && <VisitModal isOpen={isOpenModal} onClose={onCloseModal} title="Форма записи" actionName='записаться' />}
     </div >
   );
