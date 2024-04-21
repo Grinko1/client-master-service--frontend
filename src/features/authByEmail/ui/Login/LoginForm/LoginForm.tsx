@@ -82,9 +82,9 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
 
   const onSignUpClick = useCallback(async () => {
     console.log(role);
-    const result = await dispatch(signUpService({ email, password, role: role.id }))
+    const result = await dispatch(signUpService({ email: curEmail, password: curPassword, role: role.id }))
     if (result.meta.requestStatus === 'fulfilled') {
-      localStorage.setItem("email", email)
+      localStorage.setItem("email", curEmail)
       localStorage.setItem("role", JSON.stringify(role))
       onSuccess();
       forceUpdate()

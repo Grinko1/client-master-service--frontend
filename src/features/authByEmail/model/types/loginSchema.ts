@@ -1,6 +1,6 @@
-import { UserRole } from "@/entities/User";
 
 export interface LoginSchema {
+    _inited: boolean;
     email: string | undefined;
     password: string;
     userId?: number,

@@ -1,7 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
-import { loginActions } from '../slice/loginSlice';
-import { Dispatch } from 'react';
 
 
 
@@ -21,7 +19,7 @@ export const logoutService = createAsyncThunk<
             localStorage.removeItem("email")
             localStorage.removeItem("role")
             localStorage.removeItem("profile")
-            // dispatch(loginActions.logout());
+            localStorage.removeItem("userId")
 
         } catch (e) {
             console.log(e);
@@ -30,16 +28,3 @@ export const logoutService = createAsyncThunk<
     },
 );
 
-// export const logoutService = () => {
-//     return (dispatch: Dispatch<any>) => {
-//         try {
-//             localStorage.removeItem("TOKEN")
-//             localStorage.removeItem("email")
-//             localStorage.removeItem("role")
-//             localStorage.removeItem("profile")
-//             dispatch(loginActions.logout());
-//         } catch (e) {
-//             console.log(e);
-//         }
-//     };
-// };

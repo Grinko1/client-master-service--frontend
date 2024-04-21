@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import cls from './Navbar.module.scss';
 import { classNames } from '@/shared/lib/classNames/classNames';
-import { LoginModal, ProfileModal, Role, getProfileData, getProfileName, logoutService } from '@/features/authByEmail';
+import { LoginModal, ProfileModal, Role, getProfileData, getProfileName, loginActions, logoutService } from '@/features/authByEmail';
 import { Link } from 'react-router-dom';
 import { getRouteMain } from '@/shared/const/router';
 import { useSelector } from 'react-redux';
@@ -9,6 +9,7 @@ import { getLoginEmail } from '@/features/authByEmail/model/selectors/getLoginEm
 import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
 import { Button } from '@/shared/ui/redesigned/Button/Button';
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
+import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 
 
 
@@ -22,21 +23,30 @@ export const Navbar = memo((props: NavbarProps) => {
   const [openAddProfileModal, setOpentAddProfileModal] = useState(false);
 
   const dispatch = useAppDispatch()
-  const email = useSelector(getLoginEmail)
-  const role: Role = useSelector(getLoginRole)
+  let email = useSelector(getLoginEmail)
+  let role = useSelector(getLoginRole)
   const name = useSelector(getProfileName)
 
-  const logoutHandler = useCallback(() => {
-    dispatch(logoutService())
-  }, [])
 
-  const isAuth = email && role;
+  const logoutHandler = () => {
+    email = ''
+    role = undefined
+    console.log("logout", role, email);
+    dispatch(logoutService())
+    dispatch(loginActions.resetForm())
+
+  }
+
+  let isAuth = !!email && !!role.id;
   console.log(isAuth, email, role);
+
   useEffect(() => {
+    isAuth = !!email && !!role.id;
     if (!isAuth) {
+
       setIsAuthModal(true)
     }
-  }, [isAuth])
+  }, [email, role])
 
   const onCloseAuthModal = useCallback(() => {
     setIsAuthModal(false);

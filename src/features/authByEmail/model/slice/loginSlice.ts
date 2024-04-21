@@ -7,6 +7,7 @@ import { logoutService } from '../services/logoutService';
 
 
 const initialState: LoginSchema = {
+  _inited: false,
   isLoading: false,
   userId: undefined,
   email: '',
@@ -50,6 +51,17 @@ export const loginSlice = createSlice({
       state.profile.name = '',
         state.profile.phone = '',
         state.profile.description = ''
+    },
+    setInited: (state) => {
+      state._inited = true
+    },
+    logout: (state) => {
+
+      localStorage.removeItem("TOKEN")
+      localStorage.removeItem("email")
+      localStorage.removeItem("role")
+      localStorage.removeItem("profile")
+      localStorage.removeItem("userId")
     }
   },
   extraReducers: (builder) => {
@@ -61,6 +73,7 @@ export const loginSlice = createSlice({
       .addCase(login.fulfilled, (state, action) => {
         state.isLoading = false;
         state.role = roles.filter(r => r.id === action.payload.role)[0]
+        state._inited = true;
         if (action.payload.profile !== null) {
           state.profile.id = action.payload.profile.id
           state.profile.name = action.payload.profile.name
@@ -85,6 +98,7 @@ export const loginSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(logoutService.fulfilled, (state, action) => {
+        state._inited = false;
         state.email = ''
         state.password = ''
         state.role = undefined

@@ -1,3 +1,5 @@
+export { getInitLoginData } from './model/selectors/getInitLogin/getInitLogin';
+
 export { loginActions, loginReducer } from './model/slice/loginSlice';
 
 export { ProfileModal } from './ui/profileForm/profileModal/ProfileModal';
