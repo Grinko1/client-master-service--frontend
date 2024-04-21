@@ -52,7 +52,7 @@ export const VisitsList = memo((props: VisitsListProps) => {
         <div className={classNames(cls.MastersList, {}, [className])}>
             <h2>Visits list</h2>
             {
-                visits.map(visit => <div className={cls.item} key={visit.id}>
+                visits.length && visits.map(visit => <div className={cls.item} key={visit.id}>
                     <b>date: {visit.date}</b> <p>time :  {visit.time}</p>
 
                     <h3>Master:</h3>

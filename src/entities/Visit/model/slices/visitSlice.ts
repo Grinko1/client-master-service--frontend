@@ -4,6 +4,8 @@ import { getAllVisits } from "../services/getAllVisits";
 import { addVisit } from "../services/addVisit";
 import { updateVisit } from "../services/updateVisit";
 import { deleteVisit } from "../services/deleteVisit";
+import { getClientVisits } from "../services/getClientVisits";
+import { getMasterVisits } from "../services/getMasterVisits";
 
 
 const initialState: VisitsSchema = {
@@ -56,6 +58,30 @@ export const visitsSlice = createSlice({
             state.visits = action.payload;
         });
         builder.addCase(getAllVisits.rejected, (state, action) => {
+            state.error = action.payload;
+            state.isLoading = false
+        });
+        builder.addCase(getClientVisits.pending, (state, payload) => {
+            state.isLoading = true
+        });
+        builder.addCase(getClientVisits.fulfilled, (state, action) => {
+            state.error = undefined;
+            state.isLoading = false;
+            state.visits = action.payload;
+        });
+        builder.addCase(getClientVisits.rejected, (state, action) => {
+            state.error = action.payload;
+            state.isLoading = false
+        });
+        builder.addCase(getMasterVisits.pending, (state, payload) => {
+            state.isLoading = true
+        });
+        builder.addCase(getMasterVisits.fulfilled, (state, action) => {
+            state.error = undefined;
+            state.isLoading = false;
+            state.visits = action.payload;
+        });
+        builder.addCase(getMasterVisits.rejected, (state, action) => {
             state.error = action.payload;
             state.isLoading = false
         });
