@@ -11,11 +11,11 @@ import { useForceUpdate } from '@/shared/lib/render/forceUpdate';
 import { getClientsListError, getClientsListLoading } from '@/entities/Client/model/selectors/getClientsList/getClientsList';
 import { updateClient } from '@/entities/Client/model/services/updateClient';
 import { addClient } from '@/entities/Client/model/services/addClient';
-import { getProfileDescription, getProfileId, getProfileName, getProfilePhone } from '@/entities/Profile/model/selectors/getProfile';
 import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
 import { updateMaster } from '@/entities/Master/model/services/updateMaster';
 import { addMaster } from '@/entities/Master/model/services/addMaster';
-import { profileActions } from '@/entities/Profile/model/slices/profileSlice';
+import { getProfileDescription, getProfileId, getProfileName, getProfilePhone } from '@/features/authByEmail/model/selectors/getProfile/getProfile';
+import { loginActions } from '@/features/authByEmail/model/slice/loginSlice';
 
 
 
@@ -48,20 +48,20 @@ const ProfileForm = memo(({ className, onSuccess, title, actionName }: ProfileFo
 
   const onChangeName = useCallback(
     (value: string) => {
-      dispatch(profileActions.setName(value));
+      dispatch(loginActions.setProfileName(value));
     },
     [dispatch],
   );
 
   const onChangePhone = useCallback(
     (value: string) => {
-      dispatch(profileActions.setPhone(value));
+      dispatch(loginActions.setProfilePhone(value));
     },
     [dispatch],
   );
   const onChangeDescription = useCallback(
     (value: string) => {
-      dispatch(profileActions.setDescription(value));
+      dispatch(loginActions.setProfileDescription(value));
     },
     [dispatch],
   );

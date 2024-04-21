@@ -11,8 +11,9 @@ import { getAllMasters } from '@/entities/Master';
 import { VisitModal } from '@/entities/Visit/ui/visitModal/VisitModal';
 import { useSelector } from 'react-redux';
 import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
-import { getProfileId } from '@/entities/Profile/model/selectors/getProfile';
+
 import { getClientVisits, getMasterVisits } from '@/entities/Visit';
+import { getProfileId } from '@/features/authByEmail';
 
 
 interface VisitsPageProps {
@@ -27,13 +28,12 @@ export const VisitsPage = memo((props: VisitsPageProps) => {
 
     useEffect(() => {
         if (role) {
-            if (role.id = "CLIENT_ROLE") {
+            if (role.id === "CLIENT_ROLE") {
                 profileId && dispatch(getClientVisits(profileId))
             } else if (role.is === "MASTER_ROLE") {
                 profileId && dispatch(getMasterVisits(profileId))
             } else {
                 dispatch(getAllVisits())
-                // dispatch(getAllMasters())
             }
         }
 

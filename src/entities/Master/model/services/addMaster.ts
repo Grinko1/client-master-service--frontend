@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Master, MasterDataProps } from "../types/master";
 import { ThunkConfig } from "@/app/providers/StoreProvider";
-import { profileActions } from "@/entities/Profile";
+import { loginActions } from "@/features/authByEmail";
+
 
 interface MasterData {
     name?: string,
@@ -24,9 +25,9 @@ export const addMaster = createAsyncThunk<Master, MasterData, ThunkConfig<string
 
             if (userId === response.data.user_id) {
                 localStorage.setItem("profile", JSON.stringify({ id: response.data.id, name: response.data.name, description: response.data.description }))
-                dispatch(profileActions.setId(response.data.id))
-                dispatch(profileActions.setName(response.data.name))
-                dispatch(profileActions.setDescription(response.data.description))
+                dispatch(loginActions.setProfileId(response.data.id))
+                dispatch(loginActions.setProfileName(response.data.name))
+                dispatch(loginActions.setProfileDescription(response.data.description))
             }
             if (!response) {
                 return rejectWithValue('Something went wrong');

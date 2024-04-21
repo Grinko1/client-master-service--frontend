@@ -3,7 +3,6 @@ import { userActions } from '@/entities/User';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { Profile } from '../../types/loginSchema';
 import { roles } from '@/features/authByEmail/consts/consts';
-import { profileActions } from '@/entities/Profile';
 
 interface LoginByEmailProps {
   email: string;
@@ -35,13 +34,11 @@ export const login = createAsyncThunk<
 
       localStorage.setItem("role", JSON.stringify(role[0] || role))
 
+      // dispatch(loginActions.setRole(role))
       localStorage.setItem("TOKEN", `Bearer ${response.data.token}`);
       localStorage.setItem("userId", response.data.userId);
       if (response.data.profile !== null) {
         localStorage.setItem("profile", JSON.stringify(response.data.profile))
-        dispatch(profileActions.setId(response.data.profile.id))
-        dispatch(profileActions.setName(response.data.profile.name))
-        dispatch(profileActions.setPhone(response.data.profile.phone))
       }
 
       dispatch(userActions.login(response.data));

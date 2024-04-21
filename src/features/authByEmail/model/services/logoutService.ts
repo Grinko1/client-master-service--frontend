@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { loginActions } from '../slice/loginSlice';
+import { Dispatch } from 'react';
 
 
 
@@ -15,17 +16,12 @@ export const logoutService = createAsyncThunk<
 
 
         try {
-            // const response = await extra.api.post('/auth/sign-in', authData);
-            // if (!response.data) {
-            //     throw new Error();
-            // }
-            // console.log("response", response);
 
             localStorage.removeItem("TOKEN")
             localStorage.removeItem("email")
             localStorage.removeItem("role")
             localStorage.removeItem("profile")
-            dispatch(loginActions.logout());
+            // dispatch(loginActions.logout());
 
         } catch (e) {
             console.log(e);
@@ -33,3 +29,17 @@ export const logoutService = createAsyncThunk<
         }
     },
 );
+
+// export const logoutService = () => {
+//     return (dispatch: Dispatch<any>) => {
+//         try {
+//             localStorage.removeItem("TOKEN")
+//             localStorage.removeItem("email")
+//             localStorage.removeItem("role")
+//             localStorage.removeItem("profile")
+//             dispatch(loginActions.logout());
+//         } catch (e) {
+//             console.log(e);
+//         }
+//     };
+// };

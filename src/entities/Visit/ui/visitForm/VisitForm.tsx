@@ -18,7 +18,8 @@ import { Dropdown } from '@/shared/ui/redesigned/Popups';
 import { ClientInfo, MasterInfo } from '../../model/types/visit';
 import { getMastersList } from '@/entities/Master/model/selectors/getMastersList';
 import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
-import { getProfileId } from '@/entities/Profile/model/selectors/getProfile';
+import { getProfileId } from '@/features/authByEmail';
+
 
 
 export interface VisitFormProps {

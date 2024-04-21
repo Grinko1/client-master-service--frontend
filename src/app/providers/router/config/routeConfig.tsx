@@ -2,21 +2,12 @@ import { RouteProps } from 'react-router-dom';
 
 import {
   AppRoutes,
-  getRouteAbout,
-  getRouteAdmin,
-  getRouteArticleCreate,
-  getRouteArticles,
-  getRouteArticlesEdit,
   getRouteClientAppointment,
   getRouteClients,
-  getRouteForbidden,
   getRouteMain,
   getRouteMasters,
   getRouteNotFound,
-  getRouteProfile,
-  getRouteSettings,
   getRouteVisits,
-  getRouterArticleDetails,
 } from '@/shared/const/router';
 import { Main } from '@/pages/main/Main';
 import { NotFoundPage } from '@/pages/NotFoundPage';
@@ -35,22 +26,27 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
   [AppRoutes.MAIN]: {
     path: getRouteMain(),
     element: <Main />,
+    // authOnly: true,
   },
   [AppRoutes.CLIENTS]: {
     path: getRouteClients(),
     element: <ClientsPage />,
+    authOnly: true,
   },
   [AppRoutes.MASTERS]: {
     path: getRouteMasters(),
     element: <MastersPage />,
+    authOnly: true,
   },
   [AppRoutes.VISITS]: {
     path: getRouteVisits(),
     element: <VisitsPage />,
+    authOnly: true,
   },
   [AppRoutes.CLIENTAPPOINTMENT]: {
     path: getRouteClientAppointment(),
     element: <ClientAppointment />,
+    authOnly: true,
   },
 
   // [AppRoutes.ABOUT]: {

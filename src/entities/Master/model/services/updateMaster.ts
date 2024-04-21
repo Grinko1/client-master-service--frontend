@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Master, MasterDataProps } from "../types/master";
 import { ThunkConfig } from "@/app/providers/StoreProvider";
-import { getProfileId } from "@/entities/Profile/model/selectors/getProfile";
-import { profileActions } from "@/entities/Profile";
+import { getProfileId, loginActions } from "@/features/authByEmail";
+
 
 interface MasterData {
     id: number,
@@ -25,9 +25,9 @@ export const updateMaster = createAsyncThunk<Master, MasterData, ThunkConfig<str
             console.log(response);
             if (currentUserId !== null && currentUserId === id) {
                 localStorage.setItem("profile", JSON.stringify({ id, name, description }))
-                dispatch(profileActions.setId(id))
-                dispatch(profileActions.setName(name))
-                dispatch(profileActions.setDescription(description))
+                dispatch(loginActions.setProfileId(id))
+                dispatch(loginActions.setProfileName(name))
+                dispatch(loginActions.setProfileDescription(description))
             }
 
 

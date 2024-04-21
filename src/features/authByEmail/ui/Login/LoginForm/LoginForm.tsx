@@ -103,59 +103,59 @@ const LoginForm = memo(({ className, onSuccess }: LoginFormProps) => {
     isSelected: role.id === currentRole.id
   }));
   return (
-    <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
-      <div className={classNames(cls.LoginForm, {}, [className])}>
-        <Text title={isSignUp ? t('Зарегистрироваться') : t('Форма авторизации')} />
-        {error && (
-          <Text text={t('Вы ввели неверный логин или пароль')} variant='error' />
-        )}
-        <Input
-          autofocus
-          type='text'
-          className={cls.input}
-          placeholder={t('Введите email')}
-          onChange={onChangeEmail}
-          value={curEmail}
-        />
-        <Input
-          type='text'
-          className={cls.input}
-          placeholder={t('Введите пароль')}
-          onChange={onChangePassword}
-          value={curPassword}
-        />
-        {isSignUp ?
-          <>
-            <div className={cls.dropdownBlock}>
-              <Dropdown
-                trigger={<Button>Интерфейс</Button>}
-                items={dropdownRolesItems}
-              />
-              <div>{currentRole?.role}</div>
-            </div>
-            <Button
-              variant='outline'
-              className={cls.loginBtn}
-              onClick={onSignUpClick}
-              disabled={isLoading}>
-              {t('Зарегистрироваться')}
-            </Button>
-          </>
-          : <div className={cls.actions}>
-            <Button onClick={() => setIsSignUp(true)}
-              variant='clear'
-            >sign-up</Button>
-            <Button
-              variant='outline'
-              className={cls.loginBtn}
-              onClick={onLoginClick}
-              disabled={isLoading}>
-              {t('Войти')}
-            </Button>
-          </div>}
+    // <DynamicModuleLoader removeAfterUnmount reducers={initialReducers}>
+    <div className={classNames(cls.LoginForm, {}, [className])}>
+      <Text title={isSignUp ? t('Зарегистрироваться') : t('Форма авторизации')} />
+      {error && (
+        <Text text={t('Вы ввели неверный логин или пароль')} variant='error' />
+      )}
+      <Input
+        autofocus
+        type='text'
+        className={cls.input}
+        placeholder={t('Введите email')}
+        onChange={onChangeEmail}
+        value={curEmail}
+      />
+      <Input
+        type='text'
+        className={cls.input}
+        placeholder={t('Введите пароль')}
+        onChange={onChangePassword}
+        value={curPassword}
+      />
+      {isSignUp ?
+        <>
+          <div className={cls.dropdownBlock}>
+            <Dropdown
+              trigger={<Button>Интерфейс</Button>}
+              items={dropdownRolesItems}
+            />
+            <div>{currentRole?.role}</div>
+          </div>
+          <Button
+            variant='outline'
+            className={cls.loginBtn}
+            onClick={onSignUpClick}
+            disabled={isLoading}>
+            {t('Зарегистрироваться')}
+          </Button>
+        </>
+        : <div className={cls.actions}>
+          <Button onClick={() => setIsSignUp(true)}
+            variant='clear'
+          >sign-up</Button>
+          <Button
+            variant='outline'
+            className={cls.loginBtn}
+            onClick={onLoginClick}
+            disabled={isLoading}>
+            {t('Войти')}
+          </Button>
+        </div>}
 
-      </div>
-    </DynamicModuleLoader>
+    </div>
+    // </DynamicModuleLoader>
   );
 });
 

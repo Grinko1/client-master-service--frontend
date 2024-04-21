@@ -8,7 +8,7 @@ import { userReducer } from '@/entities/User';
 import { clientsReducer } from '@/entities/Client/model/slices/clientsSlice';
 import { mastersReducer } from '@/entities/Master';
 import { visitsReducer } from '@/entities/Visit';
-import { profileReducer } from '@/entities/Profile/model/slices/profileSlice';
+import { loginReducer } from '@/features/authByEmail/model/slice/loginSlice';
 
 export function createReduxStore(
   initialState?: StateSchema,
@@ -20,7 +20,7 @@ export function createReduxStore(
     clients: clientsReducer,
     masters: mastersReducer,
     visits: visitsReducer,
-    profile: profileReducer,
+    loginForm: loginReducer,
     // ui: uiReducer,
     [rtkApi.reducerPath]: rtkApi.reducer,
   };

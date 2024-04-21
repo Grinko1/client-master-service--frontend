@@ -8,8 +8,7 @@ import { visitsActions } from '../../model/slices/visitSlice';
 import { Visit } from '../../model/types/visit';
 import { getVisitsList } from '../../model/selectors/getVisitsList';
 import { VisitModal } from '../visitModal/VisitModal';
-import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
-import { getProfileId } from '@/entities/Profile/model/selectors/getProfile';
+
 
 
 interface VisitsListProps {

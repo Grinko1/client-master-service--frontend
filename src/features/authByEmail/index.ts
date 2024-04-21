@@ -1,4 +1,8 @@
-export { getProfileData } from './model/selectors/getProfile/getProfile';
+export { loginActions, loginReducer } from './model/slice/loginSlice';
+
+export { ProfileModal } from './ui/profileForm/profileModal/ProfileModal';
+
+export { getProfileData, getProfileDescription, getProfileId, getProfileName, getProfilePhone } from './model/selectors/getProfile/getProfile';
 
 export { logoutService } from './model/services/logoutService';
 

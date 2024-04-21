@@ -9,19 +9,18 @@ import { LoginSchema } from '@/features/authByEmail';
 import { ClientsSchema } from '@/entities/Client/model/types/client';
 import { MastersSchema } from '@/entities/Master';
 import { VisitsSchema } from '@/entities/Visit';
-import { ProfileSchema } from '@/entities/Profile/model/types/profile';
 
 export interface StateSchema {
     user: UserSchema;
     clients: ClientsSchema,
     masters: MastersSchema,
     visits: VisitsSchema,
-    profile: ProfileSchema
+
     // ui: UISchema;
     [rtkApi.reducerPath]: ReturnType<typeof rtkApi.reducer>
 
     // Асинхронные редюсеры
-    loginForm?: LoginSchema;
+    loginForm: LoginSchema;
     // profile?: ProfileSchema;
     // articleDetails?: ArticleDetailsSchema;
     // addCommentForm?: AddCommentFormSchema;

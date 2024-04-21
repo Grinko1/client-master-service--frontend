@@ -3,37 +3,23 @@ import { Navigate, useLocation } from 'react-router-dom';
 
 import { useMemo } from 'react';
 import { getRouteForbidden, getRouteMain } from '@/shared/const/router';
+import { Role } from '@/features/authByEmail';
+import { getLoginEmail } from '@/features/authByEmail/model/selectors/getLoginEmail/getLoginEmail';
+import { getLoginRole } from '@/features/authByEmail/model/selectors/getLoginRole/getLoginRole';
 
 export interface RequireAuthProps {
   children: JSX.Element;
-  // roles?: UserRole[];
 }
 export function RequireAuth({ children }: RequireAuthProps) {
-  // const auth = useSelector(getUserAuthData);
   const location = useLocation();
-  // const userRoles = useSelector(getUserRoles);
+  const email = useSelector(getLoginEmail)
+  const role: Role = useSelector(getLoginRole)
+  const auth = role && email
 
-  // const hasRequiredRoles = useMemo(() => {
-    // if (!roles) {
-    //   return true;
-    // }
-    // return roles.some((requiredRole) => {
-    //   const hasRole = userRoles?.includes(requiredRole);
-    //   console.log(hasRole);
-    //   return hasRole;
-    // });
-  // }, [roles, userRoles]);
+  if (!auth) {
 
-  // if (!auth) {
-  //   // Redirect them to the /login page, but save the current location they were
-  //   // trying to go to when they were redirected. This allows us to send them
-  //   // along to that page after they login, which is a nicer user experience
-  //   // than dropping them off on the home page.
-  //   return <Navigate to={getRouteMain()} state={{ from: location }} replace />;
-  // }
-  // if (!hasRequiredRoles) {
-  //   return <Navigate to={getRouteForbidden()} state={{ from: location }} replace />;
-  // }
+    return <Navigate to={getRouteMain()} state={{ from: location }} replace />;
+  }
 
   return children;
 }

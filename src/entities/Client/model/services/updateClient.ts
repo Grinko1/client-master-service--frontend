@@ -2,10 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 
 import { Client, ClientDataProps } from '../types/client';
-import { getClientId } from '../selectors/getClientForm/getClientForm';
-import { clientsActions } from '../slices/clientsSlice';
-import { getProfileId } from '@/entities/Profile/model/selectors/getProfile';
-import { profileActions } from '@/entities/Profile';
+import { getProfileId, loginActions } from '@/features/authByEmail';
+
 
 
 interface ClientData {
@@ -28,9 +26,9 @@ export const updateClient = createAsyncThunk<Client, ClientData, ThunkConfig<str
             console.log(response);
             if (currentUserId !== null && currentUserId === id) {
                 localStorage.setItem("profile", JSON.stringify({ id, name, phone }))
-                dispatch(profileActions.setId(id))
-                dispatch(profileActions.setName(name))
-                dispatch(profileActions.setPhone(phone))
+                dispatch(loginActions.setProfileId(id))
+                dispatch(loginActions.setProfileName(name))
+                dispatch(loginActions.setProfilePhone(phone))
             }
 
             if (!response) {
